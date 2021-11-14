@@ -9,3 +9,4 @@ steps:
         run: app
   - name: "Finish Build"
     command: "./buildevents build $BUILDKITE_BUILD_ID $BUILD_START success"
+    if: build.state == "passed"
