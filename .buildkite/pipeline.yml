@@ -7,6 +7,7 @@ steps:
     plugins:
       docker-compose#v3.9.0:
         run: app
+        propagate-environment: true
   - name: "Finish Build"
     command: "./buildevents build $BUILDKITE_BUILD_ID $BUILD_START success"
     if: build.state == "passed"
