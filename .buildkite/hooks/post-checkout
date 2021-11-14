@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -eu
+
+#Fetch Buildevents
+curl -L -o buildevents https://github.com/honeycombio/buildevents/releases/latest/download/buildevents-linux-amd64
+chmod 755 buildevents

@@ -1,6 +1,11 @@
 steps:
+  - name: "Setup Buildevents"
+    command: "export BUILD_START=$(date +%s)"
   - name: ":rspec:"
-    command: "rspec --color specs"
+    command: "STEP_START=$(date +%s) && STEP_SPAN_ID=$(echo rspec | sum | cut -f 1 -d \ )"
+    command: "./buildevents cmd $BUILDKITE_BUILD_ID $STEP_SPAN_ID rspec-tests -- rspec --color specs"
     plugins:
       docker-compose#v3.9.0:
         run: app
+  - name: "Finish Build"
+    command: "./buildevents build $BUILDKITE_BUILD_ID $BUILD_START success"
