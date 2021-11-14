@@ -11,8 +11,11 @@ steps:
         env:
             - BUILDKITE_BUILD_ID
             - BUILDKITE_STEP_ID
-  - name: "Finish Build"
+  - name: "Build Passed"
     command: "./buildevents build $BUILDKITE_BUILD_NUMBER $BUILD_START success"
-    key: build-finish
-    if: build.state == "passed"
-
+    key: build-pass
+    if: build.state != "failed"
+  - name: "Build Failed"
+    command: "./buildevents build $BUILDKITE_BUILD_NUMBER $BUILD_START failure"
+    key: build-fail
+    if: build.state == "failed"
