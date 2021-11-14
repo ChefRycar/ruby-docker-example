@@ -11,6 +11,7 @@ steps:
         env:
             - BUILDKITE_BUILD_ID
             - BUILDKITE_STEP_ID
+  - wait
   - name: "Build Passed"
     command: "./buildevents build $BUILDKITE_BUILD_NUMBER $BUILD_START success"
     key: build-pass
