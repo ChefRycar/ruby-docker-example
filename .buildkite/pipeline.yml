@@ -3,14 +3,14 @@ steps:
     command: "export BUILD_START=$(date +%s)"
     key: buildevents-setup
   - name: ":rspec:"
-    command: "./buildevents cmd $BUILDKITE_BUILD_ID $STEP_SPAN_ID rspec-tests -- rspec --color specs"
+    command: "./buildevents cmd $BUILDKITE_BUILD_ID $BUILDKITE_STEP_ID rspec-tests -- rspec --color specs"
     key: rspec-test
     plugins:
       docker-compose#v3.9.0:
         run: app
         env:
-            - BUILDKITE_BUILD_NUMBER
-            - BUILDKITE_STEP_KEY
+            - BUILDKITE_BUILD_ID
+            - BUILDKITE_STEP_ID
   - name: "Finish Build"
     command: "./buildevents build $BUILDKITE_BUILD_NUMBER $BUILD_START success"
     key: build-finish
