@@ -13,12 +13,14 @@ steps:
             - BUILDKITE_STEP_ID
   - wait
   - name: "Build Passed"
-    command: "export $BUILD_START_TIME = curl -H \"Authorization: Bearer $BUILDKITE_API_TOKEN\" \"https://api.buildkite.com/v2/organizations/rycars-discount-demos/pipelines/ruby-docker-example/builds/3db8086a-fb69-4fa7-b5e3-f3445e656522/\" | jq -r .started_at"
+    command: "export $BUILD_START_TIME = curl -H \"Authorization: Bearer $BUILDKITE_API_TOKEN\" \"https://api.buildkite.com/v2/organizations/$BUILDKITE_ORGANIZATION_SLUG/pipelines/$BUILDKITE_PIPELINE_SLUG/builds/$BUILDKITE_BUILD_ID/\" | jq -r .started_at"
     command: "echo $BUILD_START_TIME"
-    command: "./buildevents build $BUILDKITE_BUILD_NUMBER $BUILD_START success"
+    command: "$BUILD_START_TIME= `date -d $BUILD_START_TIME +%s`"
+    command: "echo $BUILD_START_TIME"
+    command: "./buildevents build $BUILDKITE_BUILD_ID $BUILD_START_TIME success"
     key: build-pass
     if: build.state != "failed"
   - name: "Build Failed"
-    command: "./buildevents build $BUILDKITE_BUILD_NUMBER $BUILD_START failure"
+    command: "./buildevents build $BUILDKITE_BUILD_ID $BUILD_START_TIME failure"
     key: build-fail
     if: build.state == "failed"
