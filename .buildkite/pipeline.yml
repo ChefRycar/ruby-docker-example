@@ -1,6 +1,6 @@
 steps:
   - name: ":rspec: RSpec Tests"
-    command: "./buildevents cmd $BUILDKITE_PIPELINE_SLUG-$BUILDKITE_BUILD_NUMBER $(echo $BUILDKITE_STEP_KEY  | sum | cut -f 1 -d \ ) rspec-tests -- rspec --color specs"
+    command: "./buildevents cmd $BUILDKITE_PIPELINE_SLUG-$BUILDKITE_BUILD_NUMBER $(echo $BUILDKITE_STEP_KEY  | sum | cut -f 1 -d \\ ) rspec-tests -- rspec --color specs"
     key: rspec-test
     plugins:
       docker-compose#v3.9.0:
