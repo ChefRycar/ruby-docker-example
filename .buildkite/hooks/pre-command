@@ -3,4 +3,4 @@
 set -euo pipefail
 
 export STEP_SPAN_ID=$(echo $BUILDKITE_STEP_KEY  | sum | cut -f 1 -d \ ) 
-echo $STEP_SPAN_ID
+echo $BUILDKITE_STEP_ID

@@ -17,6 +17,6 @@ RUN chmod 755 buildevents
 
 RUN apk update && apk add bash
 RUN env
-RUN ./buildevents cmd $BUILDKITE_PIPELINE_SLUG-$BUILDKITE_BUILD_NUMBER $STEP_SPAN_ID bundle-install -- bundle install -j 8
+RUN ./buildevents cmd $BUILDKITE_PIPELINE_SLUG-$BUILDKITE_BUILD_NUMBER $BUILDKITE_STEP_ID bundle-install -- bundle install -j 8
 
 ADD . /app
