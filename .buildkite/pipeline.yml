@@ -1,6 +1,6 @@
 steps:
   - name: ":rspec: RSpec Tests"
-    command: "STEP_SPAN_ID=$(echo rspec-test | sum | cut -f 1 -d \\ ) ./buildevents cmd $BUILDKITE_PIPELINE_SLUG-$BUILDKITE_BUILD_NUMBER $STEP_SPAN_ID rspec-tests -- rspec --color specs"
+    command: "STEP_SPAN_ID=$(echo rspec-test | sum | cut -f 1 -d \\ ) && ./buildevents cmd $BUILDKITE_PIPELINE_SLUG-$BUILDKITE_BUILD_NUMBER $STEP_SPAN_ID rspec-tests -- rspec --color specs"
     key: rspec-test
     plugins:
       docker-compose#v3.9.0:
