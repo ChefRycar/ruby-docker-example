@@ -1,6 +1,8 @@
 FROM ruby:2.7-alpine
 
 WORKDIR /app
+ARG BUILDKITE_BUILD_ID
+ARG BUILDKITE_STEP_ID
 
 ADD Gemfile Gemfile.lock /app/
 ADD https://github.com/honeycombio/buildevents/releases/latest/download/buildevents-linux-amd64 buildevents

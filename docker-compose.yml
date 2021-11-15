@@ -2,7 +2,7 @@ version: '3'
 
 services:
   app:
-    run: .
-    environment:
-      - BUILDKITE_BUILD_ID
-      - BUILDKITE_STEP_ID
+    build: .
+      args:
+        - BUILDKITE_BUILD_ID=${BUILDKITE_BUILD_ID}
+        - BUILDKITE_STEP_ID=${BUILDKITE_STEP_ID}
