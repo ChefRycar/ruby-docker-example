@@ -9,6 +9,7 @@ steps:
           - BUILDKITE_PIPELINE_SLUG
           - BUILDKITE_BUILD_NUMBER
           - STEP_SPAN_ID
+          - BUILDEVENT_APIKEY
   - wait
   - name: "Build Report"
     command: "scripts/build_report.sh"
