@@ -4,11 +4,12 @@ set -eu
 
 #Initiate the step
 STEP_START=$(date +%s)
+BUILDKITE_STEP=$BUILDKITE_STEP_KEY
 echo $BUILDKITE_COMMAND
 if [ "$BUILDKITE_COMMAND" = "buildkite-agent pipeline upload" ]
 then
-  BUILDKITE_STEP_KEY="pipeline-upload"
+  BUILDKITE_STEP="pipeline-upload"
 fi
 
 STEP_SPAN_ID=$(echo $BUILDKITE_STEP_KEY | sum | cut -f 1 -d \ )
-./buildevents step $BUILDKITE_PIPELINE_SLUG-$BUILDKITE_BUILD_NUMBER $BUILDKITE_STEP_ID $STEP_START $BUILDKITE_STEP_KEY
+./buildevents step $BUILDKITE_PIPELINE_SLUG-$BUILDKITE_BUILD_NUMBER $BUILDKITE_STEP_ID $STEP_START $BUILDKITE_STEP
