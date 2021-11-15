@@ -8,5 +8,9 @@ chmod 755 buildevents
 
 #Initiate the step
 STEP_START=$(date +%s)
+if [ $BUILDKITE_COMMAND -eq 'buildkite-agent pipeline upload' ]; then
+  BUILDKITE_STEP_KEY="pipeline-upload"
+fi
+
 echo "$BUILDKITE_BUILD_ID $BUILDKITE_STEP_ID $STEP_START $BUILDKITE_STEP_KEY"
 ./buildevents step $BUILDKITE_BUILD_ID $BUILDKITE_STEP_ID $STEP_START $BUILDKITE_STEP_KEY
