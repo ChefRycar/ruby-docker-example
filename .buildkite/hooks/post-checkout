@@ -7,4 +7,5 @@ curl -L -o buildevents https://github.com/honeycombio/buildevents/releases/lates
 chmod 755 buildevents
 
 #Initiate the step
-./buildevents step $BUILDKITE_BUILD_ID $BUILDKITE_STEP_ID `date +%s` $BUILDKITE_STEP_KEY
+STEP_START=$(date +%s)
+./buildevents step $BUILDKITE_BUILD_ID $BUILDKITE_STEP_ID $STEP_START $BUILDKITE_STEP_KEY

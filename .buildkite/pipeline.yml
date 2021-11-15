@@ -1,6 +1,4 @@
 steps:
-  - name: "API Check"
-    command: "curl -H \"Authorization: Bearer $BUILDKITE_API_TOKEN\" \"https://api.buildkite.com/v2/organizations/$BUILDKITE_ORGANIZATION_SLUG/pipelines/$BUILDKITE_PIPELINE_SLUG/builds/$BUILDKITE_BUILD_ID/\" | jq"
   - name: ":rspec: RSpec Tests"
     command: "./buildevents cmd $BUILDKITE_BUILD_ID $BUILDKITE_STEP_ID rspec-tests -- rspec --color specs"
     key: rspec-test
