@@ -5,14 +5,3 @@ set -eu
 #Fetch Buildevents
 curl -L -o buildevents https://github.com/honeycombio/buildevents/releases/latest/download/buildevents-linux-amd64
 chmod 755 buildevents
-
-#Initiate the step
-STEP_START=$(date +%s)
-echo $BUILDKITE_COMMAND
-if [ "$BUILDKITE_COMMAND" = "buildkite-agent pipeline upload" ]
-then
-  BUILDKITE_STEP_KEY="pipeline-upload"
-fi
-
-STEP_SPAN_ID=$(echo $BUILDKITE_STEP_KEY | sum | cut -f 1 -d \ )
-./buildevents step $BUILDKITE_PIPELINE_SLUG-$BUILDKITE_BUILD_NUMBER $STEP_SPAN_ID $STEP_START $BUILDKITE_STEP_KEY
