@@ -8,3 +8,12 @@ echo "curl -H \"Authorization: Bearer $BUILDKITE_API_TOKEN\" \"https://api.build
 
 export BUILD_START_TIME=`curl -H "Authorization: Bearer $BUILDKITE_API_TOKEN" "https://api.buildkite.com/v2/organizations/$BUILDKITE_ORGANIZATION_SLUG/pipelines/$BUILDKITE_PIPELINE_SLUG/builds/$BUILDKITE_BUILD_NUMBER/" | jq -r .started_at`
 BUILD_START_TIME=`TZ=UTC date -d $BUILD_START_TIME +%s`
+
+#Initiate the step
+export STEP_START=$(date +%s)
+export BUILDKITE_STEP=$BUILDKITE_STEP_KEY
+echo $BUILDKITE_COMMAND
+if [ "$BUILDKITE_COMMAND" = "buildkite-agent pipeline upload" ]
+then
+  BUILDKITE_STEP="pipeline-upload"
+fi
