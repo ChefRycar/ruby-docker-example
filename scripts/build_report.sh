@@ -2,12 +2,4 @@
 
 set -eu
 
-curl -H "Authorization: Bearer $BUILDKITE_API_TOKEN" "https://api.buildkite.com/v2/organizations/$BUILDKITE_ORGANIZATION_SLUG/pipelines/$BUILDKITE_PIPELINE_SLUG/builds/$BUILDKITE_BUILD_NUMBER/" | jq
-echo "curl -H \"Authorization: Bearer $BUILDKITE_API_TOKEN\" \"https://api.buildkite.com/v2/organizations/$BUILDKITE_ORGANIZATION_SLUG/pipelines/$BUILDKITE_PIPELINE_SLUG/builds/$BUILDKITE_BUILD_NUMBER/\" | jq"
-
-export BUILD_START_TIME=`curl -H "Authorization: Bearer $BUILDKITE_API_TOKEN" "https://api.buildkite.com/v2/organizations/$BUILDKITE_ORGANIZATION_SLUG/pipelines/$BUILDKITE_PIPELINE_SLUG/builds/$BUILDKITE_BUILD_NUMBER/" | jq -r .started_at`
-echo $BUILD_START_TIME
-BUILD_START_TIME=`TZ=UTC date -d $BUILD_START_TIME +%s`
-echo $BUILD_START_TIME
-
 ./buildevents build $BUILDKITE_PIPELINE_SLUG-$BUILDKITE_BUILD_NUMBER $BUILD_START_TIME success
