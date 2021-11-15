@@ -8,6 +8,7 @@ steps:
         env:
           - BUILDKITE_PIPELINE_SLUG
           - BUILDKITE_BUILD_NUMBER
+          - BUILDKITE_STEP_ID
           - STEP_SPAN_ID
           - BUILDEVENT_APIKEY
   - wait
