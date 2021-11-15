@@ -1,13 +1,12 @@
 steps:
   - name: ":rspec: RSpec Tests"
-    command: "./buildevents cmd $BUILDKITE_BUILD_ID $BUILDKITE_STEP_ID rspec-tests -- rspec --color specs"
+    command: "./buildevents cmd $BUILDKITE_BUILD_ID $(echo rspec-test | sum | cut -f 1 -d \ ) rspec-tests -- rspec --color specs"
     key: rspec-test
     plugins:
       docker-compose#v3.9.0:
         run: app
         env:
           - BUILDKITE_BUILD_ID
-          - BUILDKITE_STEP_ID
   - wait
   - name: "Build Report"
     command: "scripts/build_report.sh"
