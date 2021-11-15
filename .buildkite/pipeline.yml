@@ -9,11 +9,6 @@ steps:
           - BUILDKITE_BUILD_ID
           - BUILDKITE_STEP_ID
   - wait
-  - name: "Build Passed"
+  - name: "Build Report"
     command: "scripts/build_report.sh"
-    key: build-pass
-    if: build.state != "failed"
-  - name: "Build Failed"
-    command: "./buildevents build $BUILDKITE_BUILD_ID $BUILD_START_TIME failure"
-    key: build-fail
-    if: build.state == "failed"
+    key: build-report
