@@ -10,9 +10,8 @@ RUN chmod 755 buildevents
 
 RUN apk update && apk add bash
 RUN echo $BUILDKITE_BUILD_ID
-RUN export STEP_SPAN_ID=$(echo rspec-test | sum | cut -f 1 -d \ )
-RUN echo $STEP_SPAN_ID
+RUN echo $(echo rspec-test | sum | cut -f 1 -d \ )
 RUN env
-RUN ./buildevents cmd $BUILDKITE_BUILD_ID $STEP_SPAN_ID bundle-install -- bundle install -j 8
+RUN ./buildevents cmd $BUILDKITE_BUILD_ID $(echo rspec-test | sum | cut -f 1 -d \ ) bundle-install -- bundle install -j 8
 
 ADD . /app
